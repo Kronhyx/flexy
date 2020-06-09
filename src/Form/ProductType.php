@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use App\Entity\Tag;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\{TextType, NumberType, FileType, TextareaType};
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ProductType extends AbstractType
 {
@@ -16,12 +19,15 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('price')
-            ->add('description')
-            ->add('image')
-            ->add('stock')
-            ->add('tags');
+            ->add('title', TextType::class)
+            ->add('price', NumberType::class)
+            ->add('description', TextareaType::class)
+            ->add('image', FileType::class)
+            ->add('stock', NumberType::class)
+            ->add('tags', EntityType::class, [
+                'class'    => Tag::class,
+                'multiple' => true,
+            ]);
     }
 
     /**
