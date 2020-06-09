@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/", name="product_index", methods={"GET"})
+     * @Route("/", methods={"GET"})
      * @param ProductRepository $productRepository
      * @return Response
      */
@@ -29,7 +29,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="product_new", methods={"GET","POST"})
+     * @Route("/new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -44,7 +44,7 @@ class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return $this->redirectToRoute('product_index');
+            return $this->redirectToRoute('app_product_index');
         }
 
         return $this->render('product/new.html.twig', [
@@ -54,7 +54,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="product_show", methods={"GET"})
+     * @Route("/{id}", methods={"GET"})
      * @param Product $product
      * @return Response
      */
@@ -66,7 +66,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", methods={"GET","POST"})
      * @param Request $request
      * @param Product $product
      * @return Response
@@ -79,7 +79,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('product_index');
+            return $this->redirectToRoute('app_product_index');
         }
 
         return $this->render('product/edit.html.twig', [
@@ -89,7 +89,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="product_delete", methods={"DELETE"})
+     * @Route("/{id}", methods={"DELETE"})
      * @param Request $request
      * @param Product $product
      * @return Response
@@ -102,6 +102,6 @@ class ProductController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('product_index');
+        return $this->redirectToRoute('app_product_index');
     }
 }

@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TagController extends AbstractController
 {
     /**
-     * @Route("/", name="tag_index", methods={"GET"})
+     * @Route("/", methods={"GET"})
      * @param TagRepository $tagRepository
      * @return Response
      */
@@ -29,7 +29,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="tag_new", methods={"GET","POST"})
+     * @Route("/new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -44,7 +44,7 @@ class TagController extends AbstractController
             $entityManager->persist($tag);
             $entityManager->flush();
 
-            return $this->redirectToRoute('tag_index');
+            return $this->redirectToRoute('app_tag_index');
         }
 
         return $this->render('tag/new.html.twig', [
@@ -54,7 +54,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="tag_show", methods={"GET"})
+     * @Route("/{id}", methods={"GET"})
      * @param Tag $tag
      * @return Response
      */
@@ -66,7 +66,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="tag_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", methods={"GET","POST"})
      * @param Request $request
      * @param Tag $tag
      * @return Response
@@ -79,7 +79,7 @@ class TagController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tag_index');
+            return $this->redirectToRoute('app_tag_index');
         }
 
         return $this->render('tag/edit.html.twig', [
@@ -89,7 +89,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="tag_delete", methods={"DELETE"})
+     * @Route("/{id}", methods={"DELETE"})
      * @param Request $request
      * @param Tag $tag
      * @return Response
@@ -102,6 +102,6 @@ class TagController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('tag_index');
+        return $this->redirectToRoute('app_tag_index');
     }
 }
