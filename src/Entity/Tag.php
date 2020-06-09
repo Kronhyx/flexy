@@ -22,6 +22,11 @@ class Tag
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="tags")
+     */
+    private $product;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Tag
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
 
         return $this;
     }
