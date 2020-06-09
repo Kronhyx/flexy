@@ -2,31 +2,37 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\{Product, Tag};
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Entity\{Product};
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
 
-class ProductFixture extends Fixture
+class ProductFixture extends AbstractFixture
 {
     public function load(ObjectManager $manager)
     {
-        $faker = Factory::create();
+        for ($i = 0; $i < 10; $i++) {
+            $product = $this->generateProduct();
+            $manager->persist($product);
+        }
 
-        $product = new Product();
-        $product
-            ->setTitle($faker->company)
-            ->setDescription($faker->text(4000))
-            ->setImage($faker->imageUrl())
-            ->setPrice($faker->randomFloat(2, 0, 100))
-            ->setStock($faker->randomDigit);
-
-        $tag = new Tag();
-        $tag->setName($faker->jobTitle);
-
-        $product->addTag($tag);
-
-        $manager->persist($product);
         $manager->flush();
     }
+
+    /**
+     * @return Product
+     */
+    private function generateProduct(): Product
+    {
+        $product = new Product();
+
+        $product
+            ->setTitle(static::$faker->company)
+            ->setDescription(static::$faker->text(4000))
+            ->setImage(static::$faker->imageUrl())
+            ->setPrice(static::$faker->randomFloat(2, 0, 100))
+            ->setStock(static::$faker->randomDigit);
+
+        return $product;
+    }
+
+
 }
