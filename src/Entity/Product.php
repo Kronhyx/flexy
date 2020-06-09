@@ -45,7 +45,7 @@ class Product
     private $stock;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tag::class, mappedBy="product")
+     * @ORM\OneToMany(targetEntity=Tag::class, mappedBy="product", cascade={"persist"})
      */
     private $tags;
 
