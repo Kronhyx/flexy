@@ -10,15 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
-class Product
+class Product extends AbstractEntity
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private ?int $id;
-
     /**
      * @ORM\Column(type="string", length=64)
      */
@@ -58,11 +51,11 @@ class Product
     }
 
     /**
-     * @return int|null
+     * @return string
      */
-    public function getId(): ?int
+    public function __toString(): string
     {
-        return $this->id;
+        return (string) $this->getTitle();
     }
 
     /**
