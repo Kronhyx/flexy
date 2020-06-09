@@ -5,6 +5,8 @@ namespace App\DataFixtures;
 use App\Entity\Tag;
 use Doctrine\Persistence\ObjectManager;
 
+CONST TAG_LENGHT = 25;
+
 /**
  * Class TagFixture
  * @package App\DataFixtures
@@ -16,7 +18,7 @@ class TagFixture extends AbstractFixture
      */
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < TAG_LENGHT; $i++) {
             $tag = $this->generateTag();
             $manager->persist($tag);
         }
