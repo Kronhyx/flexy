@@ -5,20 +5,20 @@ namespace App\DataFixtures;
 use App\Entity\{Product};
 use Doctrine\Persistence\ObjectManager;
 
-CONST PRODUCT_LENGHT = 20;
-
 /**
  * Class ProductFixture
  * @package App\DataFixtures
  */
 class ProductFixture extends AbstractFixture
 {
+    protected const PRODUCT_LENGHT = 20;
+
     /**
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < PRODUCT_LENGHT; $i++) {
+        for ($i = 0; $i < self::PRODUCT_LENGHT; $i++) {
             $product = $this->generateProduct();
             $manager->persist($product);
         }

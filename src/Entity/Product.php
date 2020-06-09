@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class Product
+ * @package App\Entity
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
 class Product extends AbstractEntity
@@ -186,5 +188,4 @@ class Product extends AbstractEntity
 
         return $this;
     }
-
 }

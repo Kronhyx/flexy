@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class Tag
+ * @package App\Entity
  * @ORM\Entity(repositoryClass=TagRepository::class)
  */
 class Tag extends AbstractEntity
@@ -37,7 +39,6 @@ class Tag extends AbstractEntity
     {
         return (string) $this->getName();
     }
-
 
     /**
      * @return string|null
