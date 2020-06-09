@@ -15,17 +15,17 @@ class Tag
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="tags")
      */
-    private $product;
+    private ?Product $product;
 
     public function getId(): ?int
     {

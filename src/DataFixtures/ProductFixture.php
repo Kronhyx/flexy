@@ -11,7 +11,10 @@ use Doctrine\Persistence\ObjectManager;
  */
 class ProductFixture extends AbstractFixture
 {
-    public function load(ObjectManager $manager)
+    /**
+     * @param ObjectManager $manager
+     */
+    public function load(ObjectManager $manager): void
     {
         for ($i = 0; $i < 10; $i++) {
             $product = $this->generateProduct();

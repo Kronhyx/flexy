@@ -17,37 +17,37 @@ class Product
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $price;
+    private ?float $price;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $image;
+    private ?string $image;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $stock;
+    private ?int $stock;
 
     /**
      * @ORM\OneToMany(targetEntity=Tag::class, mappedBy="product", cascade={"persist"})
      */
-    private $tags;
+    private ArrayCollection $tags;
 
     public function __construct()
     {
