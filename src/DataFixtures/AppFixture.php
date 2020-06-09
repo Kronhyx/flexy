@@ -41,8 +41,14 @@ class AppFixture extends AbstractFixture implements DependentFixtureInterface
      */
     protected function addTagsToProduct(Product $product, ArrayCollection $tags, ObjectManager $manager): void
     {
-        $product->addTag($tags->first());
+        // Get some random tags
+        $randomTags = static::$faker->randomElements($tags->toArray(), static::$faker->numberBetween(1, count($tags)));
 
-        $manager->persist($product);
+        // Walk random tags and add to Product
+        foreach ($randomTags as $tag) {
+            $product->addTag($tag);
+            $manager->persist($product);
+        }
+
     }
 }

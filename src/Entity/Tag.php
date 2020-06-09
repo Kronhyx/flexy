@@ -6,6 +6,7 @@ use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass=TagRepository::class)
@@ -27,36 +28,23 @@ class Tag
     /**
      * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="tags")
      */
-    private ArrayCollection $products;
+    private $products;
 
-    /**
-     * Tag constructor.
-     */
     public function __construct()
     {
         $this->products = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     * @return $this
-     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -72,10 +60,6 @@ class Tag
         return $this->products;
     }
 
-    /**
-     * @param Product $product
-     * @return $this
-     */
     public function addProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
@@ -86,10 +70,6 @@ class Tag
         return $this;
     }
 
-    /**
-     * @param Product $product
-     * @return $this
-     */
     public function removeProduct(Product $product): self
     {
         if ($this->products->contains($product)) {

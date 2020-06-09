@@ -47,7 +47,7 @@ class Product
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="products")
      */
-    private ArrayCollection $tags;
+    private $tags;
 
     /**
      * Product constructor.
