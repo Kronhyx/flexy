@@ -15,27 +15,27 @@ class Product extends AbstractEntity
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private ?string $title;
+    private ?string $title = '';
 
     /**
      * @ORM\Column(type="float")
      */
-    private ?float $price;
+    private ?float $price = 0;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $description;
+    private ?string $description = '';
 
     /**
      * @ORM\Column(type="text")
      */
-    private ?string $image;
+    private ?string $image = '';
 
     /**
      * @ORM\Column(type="integer")
      */
-    private ?int $stock;
+    private ?int $stock = 0;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="products")
