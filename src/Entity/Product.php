@@ -45,25 +45,38 @@ class Product
     private ?int $stock;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tag::class, mappedBy="product", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="products")
      */
     private ArrayCollection $tags;
 
+    /**
+     * Product constructor.
+     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -71,11 +84,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getPrice(): ?float
     {
         return $this->price;
     }
 
+    /**
+     * @param float $price
+     * @return $this
+     */
     public function setPrice(float $price): self
     {
         $this->price = $price;
@@ -83,11 +103,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string|null $description
+     * @return $this
+     */
     public function setDescription(?string $description): self
     {
         $this->description = $description;
@@ -95,11 +122,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
+    /**
+     * @param string $image
+     * @return $this
+     */
     public function setImage(string $image): self
     {
         $this->image = $image;
@@ -107,11 +141,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getStock(): ?int
     {
         return $this->stock;
     }
 
+    /**
+     * @param int $stock
+     * @return $this
+     */
     public function setStock(int $stock): self
     {
         $this->stock = $stock;
@@ -127,26 +168,30 @@ class Product
         return $this->tags;
     }
 
+    /**
+     * @param Tag $tag
+     * @return $this
+     */
     public function addTag(Tag $tag): self
     {
         if (!$this->tags->contains($tag)) {
             $this->tags[] = $tag;
-            $tag->setProduct($this);
         }
 
         return $this;
     }
 
+    /**
+     * @param Tag $tag
+     * @return $this
+     */
     public function removeTag(Tag $tag): self
     {
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
-            // set the owning side to null (unless already changed)
-            if ($tag->getProduct() === $this) {
-                $tag->setProduct(null);
-            }
         }
 
         return $this;
     }
+
 }

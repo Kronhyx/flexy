@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TagRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,20 +25,38 @@ class Tag
     private ?string $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="tags")
      */
-    private ?Product $product;
+    private ArrayCollection $products;
 
+    /**
+     * Tag constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -44,14 +64,38 @@ class Tag
         return $this;
     }
 
-    public function getProduct(): ?Product
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts(): Collection
     {
-        return $this->product;
+        return $this->products;
     }
 
-    public function setProduct(?Product $product): self
+    /**
+     * @param Product $product
+     * @return $this
+     */
+    public function addProduct(Product $product): self
     {
-        $this->product = $product;
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->addTag($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Product $product
+     * @return $this
+     */
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->contains($product)) {
+            $this->products->removeElement($product);
+            $product->removeTag($this);
+        }
 
         return $this;
     }
