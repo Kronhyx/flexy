@@ -5,6 +5,10 @@ namespace App\DataFixtures;
 use App\Entity\{Product};
 use Doctrine\Persistence\ObjectManager;
 
+/**
+ * Class ProductFixture
+ * @package App\DataFixtures
+ */
 class ProductFixture extends AbstractFixture
 {
     public function load(ObjectManager $manager)
