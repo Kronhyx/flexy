@@ -1,5 +1,4 @@
 "use strict";
-import 'jquery.easing'
 
 // Close any open menu accordions when window is resized below 768px
 $(window).resize(function () {
