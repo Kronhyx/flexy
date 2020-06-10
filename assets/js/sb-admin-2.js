@@ -1,11 +1,12 @@
 "use strict";
+import 'jquery.easing'
+import 'multiselect'
 
 // Close any open menu accordions when window is resized below 768px
-$(window).resize(function () {
+$(window).resize(() => {
 	if ($(window).width() < 768) {
 		$('.sidebar .collapse').collapse('hide');
 	}
-
 });
 
 // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
@@ -36,3 +37,7 @@ $(document).on('click', 'a.scroll-to-top', function (e) {
 	}, 1000, 'easeInOutExpo');
 	e.preventDefault();
 });
+
+$(document).ready(() => {
+	$('select[multiple]').multiSelect({ cssClass: 'w-100' });
+})
