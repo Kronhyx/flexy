@@ -1,0 +1,25 @@
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="bg-gray-200">
+        <tr>
+            <th>ID</th>
+            {% block thead %}{% endblock %}
+            <th width="1%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in items %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            {% block nodata %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endblock %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
