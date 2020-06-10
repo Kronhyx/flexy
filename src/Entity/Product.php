@@ -15,29 +15,30 @@ use Doctrine\ORM\Mapping as ORM;
 class Product extends AbstractEntity
 {
     /**
+     * @var string|null
      * @ORM\Column(type="string", length=64)
      */
-    private ?string $title = '';
+    private ?string $title = null;
 
     /**
      * @ORM\Column(type="float")
      */
-    private ?float $price = 0;
+    private ?float $price = null;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $description = '';
+    private ?string $description = null;
 
     /**
      * @ORM\Column(type="text")
      */
-    private ?string $image = '';
+    private ?string $image = null;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private ?int $stock = 0;
+    private ?int $stock = null;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="products")

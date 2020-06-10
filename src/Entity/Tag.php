@@ -17,7 +17,7 @@ class Tag extends AbstractEntity
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private ?string $name;
+    private ?string $name = null;
 
     /**
      * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="tags")
