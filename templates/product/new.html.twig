@@ -1,11 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Product{% endblock %}
+{% block title 'New' %}
+{% block caption 'Product' %}
 
 {% block body %}
-    <h1>Create new Product</h1>
+    {{ form_start(form) }}
+    <div class="row">
 
-    {{ include('product/_form.html.twig') }}
+        <div class="col-7">
+            <div class="card mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0">Information</h6>
+                </div>
+                <div class="card-body">
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.price) }}
+                    {{ form_row(form.image) }}
+                    {{ form_row(form.stock) }}
+                    {{ form_row(form.description) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="card mb-4">
+                <div class="card-header py-3">
+                    <h6>Tags</h6>
+                </div>
+                <div class="card-body">
+                    {{ form_widget(form.tags) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between">
+                    <a class="btn btn-secondary" href="{{ path('app_product_index') }}">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-save"></i> {{ button_label|default('Save') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+        {{ form_widget(form) }}
 
-    <a href="{{ path('app_product_index') }}">back to list</a>
+    </div>
+    {{ form_end(form) }}
 {% endblock %}
