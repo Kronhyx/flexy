@@ -22,6 +22,9 @@ class ProductType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /**@var Product $entity */
+        $entity = $builder->getData();
+
         $builder
             ->add('title', TextType::class)
             ->add('price', NumberType::class)
@@ -29,6 +32,7 @@ class ProductType extends AbstractType
             ->add('stock', NumberType::class)
             ->add('file', FileType::class, [
                 'label'       => 'Image',
+                'required'    => is_null($entity->getId()), //check if product is new to make file upload required
                 'mapped'      => false,
                 'constraints' => [
                     new File([
