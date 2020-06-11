@@ -5,10 +5,10 @@ namespace App\Form;
 use App\Entity\Product;
 use App\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\{FileType, NumberType, TextareaType, TextType};
+use Symfony\Component\Form\Extension\Core\Type\{FileType, IntegerType, TextareaType, TextType};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints;
 
 /**
  * Class ProductType
@@ -27,19 +27,21 @@ class ProductType extends AbstractType
 
         $builder
             ->add('title', TextType::class)
-            ->add('price', NumberType::class)
-            ->add('description', TextareaType::class)
-            ->add('stock', NumberType::class)
+            ->add('price', IntegerType::class)
+            ->add('description', TextareaType::class, [
+                'attr' => ['rows' => 5],
+            ])
+            ->add('stock', IntegerType::class)
             ->add('file', FileType::class, [
                 'label'       => 'Image',
                 'required'    => is_null($entity->getId()), //check if product is new to make file upload required
                 'mapped'      => false,
                 'constraints' => [
-                    new File([
+                    new Constraints\File([
                         'maxSize'          => '5M',
                         'mimeTypesMessage' => 'Please upload a valid image format',
                         'mimeTypes'        => [
-                            'image/jpeg',
+                            'image/jpg',
                             'image/png',
                             'image/gif',
                         ],

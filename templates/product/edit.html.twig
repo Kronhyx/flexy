@@ -9,5 +9,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ include('product/_form.html.twig', {'button_label': 'Update'}) }}
+    {% embed 'product/_form.html.twig' with {'button_label': 'Update' } %}
+
+    {% endembed %}
 {% endblock %}

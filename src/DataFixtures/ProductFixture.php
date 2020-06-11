@@ -35,7 +35,7 @@ class ProductFixture extends AbstractFixture
 
         $product
             ->setTitle(static::$faker->company)
-            ->setDescription(static::$faker->text(4000))
+            ->setDescription(static::$faker->text(500))
             ->setImage(static::$faker->imageUrl())
             ->setPrice(static::$faker->randomFloat(2, 0, 100))
             ->setStock(static::$faker->randomDigit);

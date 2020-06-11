@@ -1,42 +1,75 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'Product' %}
+{% block title 'View #'~product.id %}
+
+{% block caption 'Product' %}
+
+{% block toolbar %}
+    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-primary">
+        <i class="fas fa-save"></i> Update
+    </a>
+{% endblock %}
 
 {% block body %}
-    <h1>Product</h1>
+    <div class="row mb-4">
+        <div class="col-8">
+            <div class="card mb-4">
+                <div class="card-header">{{ 'Information' | trans }}</div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-2">{{ 'Title' | trans }}</dt>
+                        <dd class="col-sm-10">{{ product.title }}</dd>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Title</th>
-                <td>{{ product.title }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ product.price }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ product.description }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ product.image }}</td>
-            </tr>
-            <tr>
-                <th>Stock</th>
-                <td>{{ product.stock }}</td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
-        </tbody>
-    </table>
+                        <dt class="col-sm-2">{{ 'Price' | trans }}</dt>
+                        <dd class="col-sm-10">${{ product.price }}</dd>
 
-    <a href="{{ path('app_product_index') }}">back to list</a>
+                        <dt class="col-sm-2">{{ 'Stock' | trans }}</dt>
+                        <dd class="col-sm-10">{{ product.stock }}</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">{{ 'Tags' | trans }} - {{ product.tags.count }}</div>
+                <div class="list-group overflow-auto" id="product_tags_box">
+                    {% for tag in product.tags %}
+                        <a href="{{ path('app_tag_show', {id: tag.id}) }}" class="list-group-item list-group-item-action">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header">{{ 'Description' | trans }}</div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dd class="col-sm-12">
+                            <img class="img-thumbnail" src="{{ product.image }}" alt="{{ product.title }}">
+                        </dd>
 
-    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+                        <dd class="col-sm-12">{{ product.description }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between">
+                    <a class="btn btn-secondary" href="{{ path('app_product_index') }}">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                    {{ include('product/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
-    {{ include('product/_delete_form.html.twig') }}
+{% block stylesheets %}
+    <style lang="css" rel="stylesheet">
+        #product_tags_box {
+            max-height: 400px;
+        }
+    </style>
 {% endblock %}
