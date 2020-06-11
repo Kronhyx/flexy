@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\{TextType, NumberType, FileType, TextareaType};
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 
 /**
  * Class ProductType
@@ -25,8 +26,22 @@ class ProductType extends AbstractType
             ->add('title', TextType::class)
             ->add('price', NumberType::class)
             ->add('description', TextareaType::class)
-            ->add('image', FileType::class)
             ->add('stock', NumberType::class)
+            ->add('file', FileType::class, [
+                'label'       => 'Image',
+                'mapped'      => false,
+                'constraints' => [
+                    new File([
+                        'maxSize'          => '5M',
+                        'mimeTypesMessage' => 'Please upload a valid image format',
+                        'mimeTypes'        => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                        ],
+                    ]),
+                ],
+            ])
             ->add('tags', EntityType::class, [
                 'class'    => Tag::class,
                 'required' => false,
