@@ -45,9 +45,8 @@ class ProductController extends AbstractController
             $imageName = $uploadService->upload($form->get('file'));
             $product->setImage($imageName);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($product);
-            $entityManager->flush();
+            $this->manager->persist($product);
+            $this->manager->flush();
 
             return $this->redirectToRoute('app_product_index');
         }
@@ -91,7 +90,7 @@ class ProductController extends AbstractController
                 $product->setImage($imageName);
             }
 
-            $this->getDoctrine()->getManager()->flush();
+            $this->manager->flush();
 
             return $this->redirectToRoute('app_product_index');
         }
@@ -111,9 +110,8 @@ class ProductController extends AbstractController
     public function delete(Request $request, Product $product): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($product);
-            $entityManager->flush();
+            $this->manager->remove($product);
+            $this->manager->flush();
         }
 
         return $this->redirectToRoute('app_product_index');
