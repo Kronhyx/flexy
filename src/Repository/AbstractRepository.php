@@ -12,11 +12,6 @@ use Doctrine\Persistence\ManagerRegistry;
 abstract class AbstractRepository extends ServiceEntityRepository
 {
     /**
-     * @return string
-     */
-    abstract public static function getEntity(): string;
-
-    /**
      * AbstractRepository constructor.
      * @param ManagerRegistry $registry
      */
@@ -24,4 +19,9 @@ abstract class AbstractRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, static::getEntity());
     }
+
+    /**
+     * @return string
+     */
+    abstract public static function getEntity(): string;
 }

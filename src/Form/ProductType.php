@@ -4,10 +4,10 @@ namespace App\Form;
 
 use App\Entity\Product;
 use App\Entity\Tag;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\{FileType, NumberType, TextareaType, TextType};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\{TextType, NumberType, FileType, TextareaType};
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 
 /**

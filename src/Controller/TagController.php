@@ -47,7 +47,7 @@ class TagController extends AbstractController
         }
 
         return $this->render('tag/new.html.twig', [
-            'tag' => $tag,
+            'tag'  => $tag,
             'form' => $form->createView(),
         ]);
     }
@@ -82,7 +82,7 @@ class TagController extends AbstractController
         }
 
         return $this->render('tag/edit.html.twig', [
-            'tag' => $tag,
+            'tag'  => $tag,
             'form' => $form->createView(),
         ]);
     }

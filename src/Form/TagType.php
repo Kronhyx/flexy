@@ -4,10 +4,10 @@ namespace App\Form;
 
 use App\Entity\Product;
 use App\Entity\Tag;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * Class TagType
@@ -24,9 +24,10 @@ class TagType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('products', EntityType::class, [
-                'class'    => Product::class,
-                'multiple' => true,
-                'required' => false,
+                'class'        => Product::class,
+                'multiple'     => true,
+                'required'     => false,
+                'by_reference' => false,
             ]);
     }
 
