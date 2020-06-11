@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Product{% endblock %}
+{% block title 'Edit' %}
+
+{% block caption 'Tag' %}
+
+{% block toolbar %}
+    {{ include('tag/_delete_form.html.twig') }}
+{% endblock %}
 
 {% block body %}
     <h1>Edit Product</h1>

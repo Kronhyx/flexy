@@ -26,6 +26,7 @@ class TagType extends AbstractType
             ->add('products', EntityType::class, [
                 'class'    => Product::class,
                 'multiple' => true,
+                'required' => false,
             ]);
     }
 

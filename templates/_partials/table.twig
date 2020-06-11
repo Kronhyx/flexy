@@ -10,7 +10,7 @@
         <tbody>
         {% for entity in items %}
             <tr>
-                <td>{{ entity.id }}</td>
+                <td width="1%" class="bg-gray-100">{{ entity.id }}</td>
                 {% block tbody %}{% endblock %}
             </tr>
         {% else %}

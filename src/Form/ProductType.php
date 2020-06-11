@@ -29,6 +29,7 @@ class ProductType extends AbstractType
             ->add('stock', NumberType::class)
             ->add('tags', EntityType::class, [
                 'class'    => Tag::class,
+                'required' => false,
                 'multiple' => true,
             ]);
     }
