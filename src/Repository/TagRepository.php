@@ -19,4 +19,23 @@ class TagRepository extends AbstractRepository
     {
         return Tag::class;
     }
+
+    /**
+     * Get the most used tags in the products
+     * @param int $limit
+     * @return Tag[]
+     */
+    public function findMostUsed(int $limit): array
+    {
+        $query = $this->createQueryBuilder('tag')
+            ->addSelect("tag.id,tag.name")
+            ->leftJoin('tag.products', 'products') // To show as well the tags without products related
+            ->addSelect('COUNT(products.id) AS productsCount')
+            ->groupBy('tag.id')
+            ->orderBy('productsCount', 'DESC')
+            ->getQuery()
+            ->setMaxResults($limit);
+
+        return $query->getResult();
+    }
 }
