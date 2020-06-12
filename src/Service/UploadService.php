@@ -20,6 +20,9 @@ class UploadService
      */
     private SluggerInterface $slugger;
 
+    /**
+     * @var ParameterBagInterface
+     */
     private ParameterBagInterface $parameterBag;
 
     /**
