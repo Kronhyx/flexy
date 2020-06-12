@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\ProductRepository;
+use App\Repository\TagRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,12 +15,17 @@ class IndexController extends AbstractController
 {
     /**
      * @Route("/")
+     * @param ProductRepository $productRepository
+     * @param TagRepository $tagRepository
      * @return Response
      */
-    public function index(): Response
+    public function index(ProductRepository $productRepository, TagRepository $tagRepository): Response
     {
         return $this->render('index/index.html.twig', [
-            'controller_name' => 'IndexController',
+            'entities' => [
+                'product' => $productRepository->findAll(),
+                'tag'     => $tagRepository->findAll(),
+            ],
         ]);
     }
 }
