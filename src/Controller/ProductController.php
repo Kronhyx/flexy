@@ -58,7 +58,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"})
+     * @Route("/{id}", methods={"GET"}, requirements={"id":"\d+"}))
      * @param Product $product
      * @return Response
      */
@@ -70,7 +70,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", methods={"GET","POST"}, requirements={"id":"\d+"})))
      * @param Request $request
      * @param Product $product
      * @param UploadService $uploadService
@@ -102,7 +102,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"})
+     * @Route("/{id}", methods={"DELETE"}, requirements={"id":"\d+"})))
      * @param Request $request
      * @param Product $product
      * @return Response

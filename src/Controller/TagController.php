@@ -53,7 +53,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"})
+     * @Route("/{id}", methods={"GET"}, requirements={"id":"\d+"})))
      * @param Tag $tag
      * @return Response
      */
@@ -65,7 +65,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", methods={"GET","POST"}, requirements={"id":"\d+"})))
      * @param Request $request
      * @param Tag $tag
      * @return Response
@@ -88,7 +88,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"})
+     * @Route("/{id}", methods={"DELETE"}, requirements={"id":"\d+"})))
      * @param Request $request
      * @param Tag $tag
      * @return Response
