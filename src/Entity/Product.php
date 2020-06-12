@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Product
@@ -17,16 +18,21 @@ class Product extends AbstractEntity
     /**
      * @var string|null
      * @ORM\Column(type="string", length=64)
+     * @Assert\Length(min="6")
+     * @Assert\NotBlank()
      */
     private ?string $title = null;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Positive()
+     * @Assert\NotBlank()
      */
     private ?float $price = null;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(max="4000")
      */
     private ?string $description = null;
 

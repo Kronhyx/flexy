@@ -1,59 +1,53 @@
-{% block body %}
-    {{ form_start(form) }}
-    <div class="row">
-
-        <div class="col-8">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h6>Information</h6>
-                </div>
-                <div class="card-body">
-                    {{ form_row(form.title) }}
-                    {{ form_row(form.price) }}
-                    {{ form_row(form.stock) }}
-                </div>
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6>Information</h6>
             </div>
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h6>Tags</h6>
-                </div>
-                <div class="card-body">
-                    {{ form_widget(form.tags) }}
-                </div>
-            </div>
-
-        </div>
-        <div class="col-4">
-            <div class="card mb-4">
-                <div class="card-header">{{ 'Description' | trans }}</div>
-                <div class="card-body">
-                    <dl class="row">
-                        <div class="col-sm-12">{{ form_widget(form.description) }}</div>
-                        <div class="col-sm-12">
-                            <img class="img-thumbnail" src="{{ product.image }}" alt="{{ product.title }}">
-                        </div>
-                    </dl>
-                </div>
-                <div class="card-footer">{{ form_row(form.file) }}</div>
+            <div class="card-body">
+                {{ form_row(form.title) }}
+                {{ form_row(form.price) }}
+                {{ form_row(form.stock) }}
+                {{ form_row(form.description) }}
             </div>
         </div>
-
-        <div class="col-4">
-        </div>
-        <div class="col-12">
-            <div class="card">
-                <div class="card-footer d-flex justify-content-between">
-                    <a class="btn btn-secondary" href="{{ path('app_product_index') }}">
-                        <i class="fas fa-arrow-left"></i> Back
-                    </a>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-save"></i> {{ button_label|default('Save') }}
-                    </button>
-                </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6>Tags</h6>
+            </div>
+            <div class="card-body">
+                {{ form_widget(form.tags) }}
             </div>
         </div>
-        {{ form_widget(form) }}
 
     </div>
-    {{ form_end(form) }}
-{% endblock %}
+    <div class="col-4">
+        <div class="card mb-4">
+            <div class="card-header">{{ 'Image' | trans }}</div>
+            <div class="card-body">
+                <dl class="row">
+                    <div class="col-sm-12">
+                        <img class="img-thumbnail"
+                             src="{{ '/uploads/' ~ product.image ?? 'https://via.placeholder.com/640X480' }}"
+                             alt="{{ product.title }}">
+                    </div>
+                </dl>
+            </div>
+            <div class="card-footer">{{ form_row(form.file) }}</div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-footer d-flex justify-content-between">
+                <a class="btn btn-secondary" href="{{ path('app_product_index') }}">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <button class="btn btn-primary">
+                    <i class="fas fa-save"></i> {{ button_label|default('Save') }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

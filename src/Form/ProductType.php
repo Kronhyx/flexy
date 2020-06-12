@@ -29,21 +29,21 @@ class ProductType extends AbstractType
             ->add('title', TextType::class)
             ->add('price', IntegerType::class)
             ->add('description', TextareaType::class, [
-                'attr' => ['rows' => 5],
+                'required' => false,
+                'attr'     => ['rows' => 5],
             ])
             ->add('stock', IntegerType::class)
             ->add('file', FileType::class, [
                 'label'       => 'Image',
                 'required'    => is_null($entity->getId()), //check if product is new to make file upload required
-                'mapped'      => false,
+                'mapped'      => false, // unmapped means that this field is not associated to any entity property
                 'constraints' => [
+                    // unmapped fields can't define their validation using annotations in the associated entity, so we need to use the PHP constraint classes
                     new Constraints\File([
                         'maxSize'          => '5M',
                         'mimeTypesMessage' => 'Please upload a valid image format',
                         'mimeTypes'        => [
-                            'image/jpg',
-                            'image/png',
-                            'image/gif',
+                            'image/*',
                         ],
                     ]),
                 ],

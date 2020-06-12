@@ -30,7 +30,7 @@
             </div>
             <div class="card mb-4">
                 <div class="card-header">{{ 'Tags' | trans }} - {{ product.tags.count }}</div>
-                <div class="list-group overflow-auto" id="product_tags_box">
+                <div class="list-group overflow-auto" style="max-height: 400px">
                     {% for tag in product.tags %}
                         <a href="{{ path('app_tag_show', {id: tag.id}) }}" class="list-group-item list-group-item-action">{{ tag }}</a>
                     {% endfor %}
@@ -43,7 +43,7 @@
                 <div class="card-body">
                     <dl class="row">
                         <dd class="col-sm-12">
-                            <img class="img-thumbnail" src="{{ product.image }}" alt="{{ product.title }}">
+                            <img class="img-thumbnail" src="{{ '/uploads/' ~ product.image }}" alt="{{ product.title }}">
                         </dd>
 
                         <dd class="col-sm-12">{{ product.description }}</dd>
@@ -64,12 +64,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block stylesheets %}
-    <style lang="css" rel="stylesheet">
-        #product_tags_box {
-            max-height: 400px;
-        }
-    </style>
 {% endblock %}

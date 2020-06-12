@@ -4,12 +4,6 @@
 
 {% block caption 'Product' %}
 
-{% block toolbar %}
-    {{ include('product/_delete_form.html.twig') }}
-{% endblock %}
+{% block toolbar include('product/_delete_form.html.twig') %}
 
-{% block body %}
-    {% embed 'product/_form.html.twig' with {'button_label': 'Update' } %}
-
-    {% endembed %}
-{% endblock %}
+{% block body include('product/_form.html.twig', {'button_label': 'Update'}) %}
