@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as BaseAbstractController;
 
 /**
@@ -25,4 +26,12 @@ abstract class AbstractController extends BaseAbstractController
         $this->manager = $manager;
     }
 
+    /**
+     * @param string $msg
+     * @throws EntityNotFoundException
+     */
+    protected function throwEntityNotFound($msg = 'This element has not been found'): void
+    {
+        throw new EntityNotFoundException($msg);
+    }
 }

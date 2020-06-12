@@ -6,17 +6,25 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\Service\UploadService;
+use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class ProductController
+ * Normally, you'd expect a $id argument to [show(), edit(), delete()]. Instead, by creating
+ * a new argument ($product) and type-hinting it with the Product class (which
+ * is a Doctrine entity), the ParamConverter automatically queries for
+ * an object whose $id property matches the {id} value. It will also
+ * show a 404 page if no Product can be found.
+ * https://symfony.com/doc/current/best_practices/controllers.html
  * @package App\Controller
  * @Route("/product")
  */
 class ProductController extends AbstractController
 {
+
     /**
      * @Route("/", methods={"GET"})
      * @param ProductRepository $productRepository
@@ -59,11 +67,16 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/{id}", methods={"GET"}, requirements={"id":"\d+"}))
-     * @param Product $product
+     * @param Product|null $product
      * @return Response
+     * @throws EntityNotFoundException
      */
-    public function show(Product $product): Response
+    public function show(Product $product = null): Response
     {
+        if ($product === null) {
+            $this->throwEntityNotFound();
+        }
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
         ]);
@@ -72,12 +85,17 @@ class ProductController extends AbstractController
     /**
      * @Route("/{id}/edit", methods={"GET","POST"}, requirements={"id":"\d+"})))
      * @param Request $request
-     * @param Product $product
+     * @param Product|null $product
      * @param UploadService $uploadService
      * @return Response
+     * @throws EntityNotFoundException
      */
-    public function edit(Request $request, Product $product, UploadService $uploadService): Response
+    public function edit(Request $request, UploadService $uploadService, Product $product = null): Response
     {
+        if ($product === null) {
+            $this->throwEntityNotFound();
+        }
+
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
@@ -104,11 +122,16 @@ class ProductController extends AbstractController
     /**
      * @Route("/{id}", methods={"DELETE"}, requirements={"id":"\d+"})))
      * @param Request $request
-     * @param Product $product
+     * @param Product|null $product
      * @return Response
+     * @throws EntityNotFoundException
      */
-    public function delete(Request $request, Product $product): Response
+    public function delete(Request $request, Product $product = null): Response
     {
+        if ($product === null) {
+            $this->throwEntityNotFound();
+        }
+
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $this->manager->remove($product);
             $this->manager->flush();

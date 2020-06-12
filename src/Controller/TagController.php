@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Tag;
 use App\Form\TagType;
 use App\Repository\TagRepository;
+use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,9 +57,14 @@ class TagController extends AbstractController
      * @Route("/{id}", methods={"GET"}, requirements={"id":"\d+"})))
      * @param Tag $tag
      * @return Response
+     * @throws EntityNotFoundException
      */
-    public function show(Tag $tag): Response
+    public function show(Tag $tag = null): Response
     {
+        if ($tag === null) {
+            $this->throwEntityNotFound();
+        }
+
         return $this->render('tag/show.html.twig', [
             'tag' => $tag,
         ]);
@@ -69,9 +75,13 @@ class TagController extends AbstractController
      * @param Request $request
      * @param Tag $tag
      * @return Response
+     * @throws EntityNotFoundException
      */
-    public function edit(Request $request, Tag $tag): Response
+    public function edit(Request $request, Tag $tag = null): Response
     {
+        if ($tag === null) {
+            $this->throwEntityNotFound();
+        }
         $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
 
@@ -92,9 +102,14 @@ class TagController extends AbstractController
      * @param Request $request
      * @param Tag $tag
      * @return Response
+     * @throws EntityNotFoundException
      */
-    public function delete(Request $request, Tag $tag): Response
+    public function delete(Request $request, Tag $tag = null): Response
     {
+        if ($tag === null) {
+            $this->throwEntityNotFound();
+        }
+
         if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
             $this->manager->remove($tag);
             $this->manager->flush();
