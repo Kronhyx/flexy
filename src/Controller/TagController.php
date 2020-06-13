@@ -44,7 +44,10 @@ class TagController extends AbstractController
             $this->manager->persist($tag);
             $this->manager->flush();
 
-            return $this->redirectToRoute('app_tag_index');
+            //Create a success html bootstrap notification in response
+            $this->sendNotification("Your TAG [$tag] has been created.", 'success');
+
+            return $this->redirectToRoute('app_tag_show', ['id' => $tag->getId()]);
         }
 
         return $this->render('tag/new.html.twig', [
@@ -88,6 +91,9 @@ class TagController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
 
+            //Create a success html bootstrap notification in response
+            $this->sendNotification("Your TAG [$tag] has been updated.", 'success');
+
             return $this->redirectToRoute('app_tag_index');
         }
 
@@ -113,6 +119,9 @@ class TagController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
             $this->manager->remove($tag);
             $this->manager->flush();
+
+            //Create a success html bootstrap notification in response
+            $this->sendNotification("Your TAG [$tag] has been deleted.", 'success');
         }
 
         return $this->redirectToRoute('app_tag_index');

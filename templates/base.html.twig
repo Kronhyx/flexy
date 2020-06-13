@@ -54,6 +54,15 @@
             <!-- Begin Page Content -->
             {% block content %}
             <div class="container-fluid">
+                {% for alert in app.flashes('bootstrap') %}
+                    <div class="alert alert-{{ alert.type }} alert-dismissible fade show" role="alert">
+                        <span>{{ alert.message }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+
                 <!-- Page Heading -->
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <div>
@@ -62,6 +71,7 @@
                     </div>
                     <div class="d-flex">{% block toolbar %}{% endblock %}</div>
                 </div>
+
 
                 {% block body %}
                     <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>

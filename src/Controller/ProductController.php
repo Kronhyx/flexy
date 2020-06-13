@@ -56,7 +56,10 @@ class ProductController extends AbstractController
             $this->manager->persist($product);
             $this->manager->flush();
 
-            return $this->redirectToRoute('app_product_index');
+            //Create a success html bootstrap notification in response
+            $this->sendNotification("Your product [$product] has been created.", 'success');
+
+            return $this->redirectToRoute('app_product_show', ['id' => $product->getId()]);
         }
 
         return $this->render('product/new.html.twig', [
@@ -110,6 +113,9 @@ class ProductController extends AbstractController
 
             $this->manager->flush();
 
+            //Create a success html bootstrap notification in response
+            $this->sendNotification("Your product [$product] has been updated.", 'success');
+
             return $this->redirectToRoute('app_product_index');
         }
 
@@ -135,6 +141,10 @@ class ProductController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $this->manager->remove($product);
             $this->manager->flush();
+
+            //Create a success html bootstrap notification in response
+            $this->sendNotification("Your product [$product] has been deleted.", 'success');
+
         }
 
         return $this->redirectToRoute('app_product_index');

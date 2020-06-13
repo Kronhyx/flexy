@@ -34,4 +34,19 @@ abstract class AbstractController extends BaseAbstractController
     {
         throw new EntityNotFoundException($msg);
     }
+
+    /**
+     * @param string $type
+     * @param string $message
+     */
+    protected function sendNotification(string $message, string $type = 'success'): void
+    {
+        $object['type'] = $type;
+        $object['message'] = $message;
+
+        // The reason to use session->getFlashBag instead this->addFlash is cause addFlass method only accept a string as parameter
+        // is necesary send a custom object to send notification type
+        $flashBag = $this->get('session')->getFlashBag();
+        $flashBag->add('bootstrap', $object);
+    }
 }

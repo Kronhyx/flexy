@@ -5,7 +5,7 @@
 {% block title 'List' %}
 
 {% block toolbar %}
-    <a href="{{ path('app_product_new') }}" class="d-none d-sm-inline-block btn btn-primary shadow-sm">
+    <a href="{{ path('app_product_new') }}" class="d-inline-block btn btn-primary shadow-sm">
         <i class="fas fa-plus fa-sm text-white-50"></i> Create
     </a>
 {% endblock %}
@@ -17,13 +17,11 @@
                 {% block thead %}
                     <th>Title</th>
                     <th>Price</th>
-                    <th>Image</th>
                     <th>Stock</th>
                 {% endblock %}
                 {% block tbody %}
                     <td>{{ entity.title }}</td>
                     <td>${{ entity.price }}</td>
-                    <td>{{ entity.image }}</td>
                     <td>{{ entity.stock }}</td>
                     <td class="btn-group">
                         <a class="btn btn-primary" href="{{ path('app_product_show', {'id': entity.id}) }}">
