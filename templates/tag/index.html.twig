@@ -13,7 +13,7 @@
 {% block body %}
     <div class="card shadow">
         <div class="card-body">
-            {% embed '_partials/table.twig' with { items: tags } %}
+            {% embed '_partials/table.html.twig' with { items: tags } %}
                 {% block thead %}
                     <th>Name</th>
                 {% endblock %}

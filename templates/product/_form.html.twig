@@ -1,7 +1,7 @@
 {{ form_start(form) }}
 <div class="row">
     <div class="col-12 col-md-8">
-        <div class="card mb-4">
+        <div class="card shadow mb-4">
             <div class="card-header">
                 <h6>Information</h6>
             </div>
@@ -12,7 +12,7 @@
                 {{ form_row(form.description) }}
             </div>
         </div>
-        <div class="card mb-4">
+        <div class="card shadow mb-4">
             <div class="card-header">
                 <h6>Tags</h6>
             </div>
@@ -23,7 +23,7 @@
 
     </div>
     <div class="col-md-4 col-12">
-        <div class="card mb-4">
+        <div class="card shadow mb-4">
             <div class="card-header">{{ 'Image' | trans }}</div>
             <div class="card-body">
                 <dl class="row">
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="col-12">
-        <div class="card">
+        <div class="card shadow mb-4">
             <div class="card-footer d-flex justify-content-between">
                 <a class="btn btn-secondary" href="{{ path('app_product_index') }}">
                     <i class="fas fa-arrow-left"></i> Back
