@@ -12,19 +12,21 @@
 
 {% block body %}
     <div class="row mb-4">
-        <div class="col-8">
+        <div class="col-12 col-md-8">
             <div class="card mb-4">
                 <div class="card-header">{{ 'Information' | trans }}</div>
                 <div class="card-body">
                     <dl class="row">
-                        <dt class="col-sm-2">{{ 'Title' | trans }}</dt>
-                        <dd class="col-sm-10">{{ product.title }}</dd>
-
-                        <dt class="col-sm-2">{{ 'Price' | trans }}</dt>
-                        <dd class="col-sm-10">${{ product.price }}</dd>
-
-                        <dt class="col-sm-2">{{ 'Stock' | trans }}</dt>
-                        <dd class="col-sm-10">{{ product.stock }}</dd>
+                        <dt class="col col-md-auto">{{ 'Title' | trans }}</dt>
+                        <dd class="col">{{ product.title }}</dd>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col col-md-auto">{{ 'Price' | trans }}</dt>
+                        <dd class="col">${{ product.price }}</dd>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col col-md-auto">{{ 'Stock' | trans }}</dt>
+                        <dd class="col">{{ product.stock }}</dd>
                     </dl>
                 </div>
             </div>
@@ -32,18 +34,20 @@
                 <div class="card-header">{{ 'Tags' | trans }} - {{ product.tags.count }}</div>
                 <div class="list-group overflow-auto" style="max-height: 400px">
                     {% for tag in product.tags %}
-                        <a href="{{ path('app_tag_show', {id: tag.id}) }}" class="list-group-item list-group-item-action">{{ tag }}</a>
+                        <a href="{{ path('app_tag_show', {id: tag.id}) }}"
+                           class="list-group-item list-group-item-action">{{ tag }}</a>
                     {% endfor %}
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-md-4 col-12">
             <div class="card">
                 <div class="card-header">{{ 'Description' | trans }}</div>
                 <div class="card-body">
                     <dl class="row">
                         <dd class="col-sm-12">
-                            <img class="img-thumbnail" src="{{ '/uploads/' ~ product.image }}" alt="{{ product.title }}">
+                            <img class="img-thumbnail" src="{{ '/uploads/' ~ product.image }}"
+                                 alt="{{ product.title }}">
                         </dd>
 
                         <dd class="col-sm-12">{{ product.description }}</dd>
