@@ -21,6 +21,7 @@ abstract class AbstractRepository extends ServiceEntityRepository
     }
 
     /**
+     * This method is in charge of solving the entity to which this repository is referenced
      * @return string
      */
     abstract public static function getEntity(): string;

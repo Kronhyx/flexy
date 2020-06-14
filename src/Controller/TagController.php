@@ -24,8 +24,10 @@ class TagController extends AbstractController
      */
     public function index(TagRepository $tagRepository): Response
     {
+        $tags = $tagRepository->findAll();
+
         return $this->render('tag/index.html.twig', [
-            'tags' => $tagRepository->findAll(),
+            'tags' => $tags,
         ]);
     }
 
@@ -38,8 +40,9 @@ class TagController extends AbstractController
     {
         $tag = new Tag();
         $form = $this->createForm(TagType::class, $tag);
-        $form->handleRequest($request);
+        $form->handleRequest($request);  //Sync form sended data with entity
 
+        //Check if form data is sended
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($tag);
             $this->manager->flush();
@@ -64,6 +67,7 @@ class TagController extends AbstractController
      */
     public function show(Tag $tag = null): Response
     {
+        //Throw exception if tag cannot be found
         if ($tag === null) {
             $this->throwEntityNotFound();
         }
@@ -82,12 +86,15 @@ class TagController extends AbstractController
      */
     public function edit(Request $request, Tag $tag = null): Response
     {
+        //Throw exception if tag cannot be found
         if ($tag === null) {
             $this->throwEntityNotFound();
         }
-        $form = $this->createForm(TagType::class, $tag);
-        $form->handleRequest($request);
 
+        $form = $this->createForm(TagType::class, $tag);
+        $form->handleRequest($request);  //Sync form sended data with entity
+
+        //Check if form data is sended
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
 
@@ -112,10 +119,12 @@ class TagController extends AbstractController
      */
     public function delete(Request $request, Tag $tag = null): Response
     {
+        //Throw exception if tag cannot be found
         if ($tag === null) {
             $this->throwEntityNotFound();
         }
 
+        //Check if token sended is valid
         if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
             $this->manager->remove($tag);
             $this->manager->flush();

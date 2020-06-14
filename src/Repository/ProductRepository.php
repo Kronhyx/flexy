@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Product;
 
 /**
+ * Class ProductRepository
+ * @package App\Repository
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
  * @method Product|null findOneBy(array $criteria, array $orderBy = null)
  * @method Product[]    findAll()
@@ -13,6 +15,7 @@ use App\Entity\Product;
 class ProductRepository extends AbstractRepository
 {
     /**
+     * @inheritDoc
      * @return string
      */
     public static function getEntity(): string

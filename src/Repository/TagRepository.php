@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Tag;
 
 /**
+ * Class TagRepository
+ * @package App\Repository
  * @method Tag|null find($id, $lockMode = null, $lockVersion = null)
  * @method Tag|null findOneBy(array $criteria, array $orderBy = null)
  * @method Tag[]    findAll()
@@ -13,6 +15,7 @@ use App\Entity\Tag;
 class TagRepository extends AbstractRepository
 {
     /**
+     * @inheritDoc
      * @return string
      */
     public static function getEntity(): string

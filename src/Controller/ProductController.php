@@ -32,8 +32,10 @@ class ProductController extends AbstractController
      */
     public function index(ProductRepository $productRepository): Response
     {
+        $products = $productRepository->findAll();
+
         return $this->render('product/index.html.twig', [
-            'products' => $productRepository->findAll(),
+            'products' => $products,
         ]);
     }
 
@@ -47,12 +49,16 @@ class ProductController extends AbstractController
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
+        $form->handleRequest($request);  //Sync form sended data with entity
 
+        //Check if form data is sended
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //Upload image file
             $imageName = $uploadService->upload($form->get('file'));
             $product->setImage($imageName);
 
+            //Save product in DB
             $this->manager->persist($product);
             $this->manager->flush();
 
@@ -76,6 +82,7 @@ class ProductController extends AbstractController
      */
     public function show(Product $product = null): Response
     {
+        //Throw exception if product cannot be found
         if ($product === null) {
             $this->throwEntityNotFound();
         }
@@ -95,15 +102,18 @@ class ProductController extends AbstractController
      */
     public function edit(Request $request, UploadService $uploadService, Product $product = null): Response
     {
+        //Throw exception if product cannot be found
         if ($product === null) {
             $this->throwEntityNotFound();
         }
 
         $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
+        $form->handleRequest($request); //Sync form sended data with entity
 
+        //Check if form data is sended
         if ($form->isSubmitted() && $form->isValid()) {
             $formFile = $form->get('file');
+
             // this condition is needed because the 'file' field is not required
             // so the images file must be processed only when a file is uploaded
             if ($formFile->getData()) {
@@ -134,10 +144,12 @@ class ProductController extends AbstractController
      */
     public function delete(Request $request, Product $product = null): Response
     {
+        //Throw exception if product cannot be found
         if ($product === null) {
             $this->throwEntityNotFound();
         }
 
+        //Check if token sended is valid
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $this->manager->remove($product);
             $this->manager->flush();

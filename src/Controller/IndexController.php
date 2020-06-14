@@ -21,13 +21,17 @@ class IndexController extends AbstractController
      */
     public function index(ProductRepository $productRepository, TagRepository $tagRepository): Response
     {
+        //Get most used tags
         $mostUsed = $tagRepository->findMostUsed(10);
+
+        $products = $productRepository->findAll();
+        $tags = $tagRepository->findAll();
 
         return $this->render('index/index.html.twig', [
             'mostUsed' => $mostUsed,
             'entities' => [
-                'product' => $productRepository->findAll(),
-                'tag'     => $tagRepository->findAll(),
+                'product' => $products,
+                'tag'     => $tags,
             ],
         ]);
     }
