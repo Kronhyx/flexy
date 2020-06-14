@@ -35,6 +35,7 @@ class ProductType extends AbstractType
             ->add('stock', IntegerType::class)
             ->add('file', FileType::class, [
                 'label'       => 'Image',
+                'attr'        => ['accept' => 'image/x-png, image/gif, image/jpeg'],
                 'required'    => is_null($entity->getId()), //check if product is new to make file upload required
                 'mapped'      => false, // unmapped means that this field is not associated to any entity property
                 'constraints' => [
@@ -43,7 +44,9 @@ class ProductType extends AbstractType
                         'maxSize'          => '5M',
                         'mimeTypesMessage' => 'Please upload a valid image format',
                         'mimeTypes'        => [
-                            'image/*',
+                            'image/gif',
+                            'image/jpeg',
+                            'image/x-png'
                         ],
                     ]),
                 ],
