@@ -93,7 +93,7 @@ Symfony directory. You'll need to set up rewrite rules to point all non-existent
 ## Updating
 
 * This application use [WebpackEncoreBundle](https://symfony.com/doc/current/frontend/encore/installation.html#installing-encore-in-symfony-applications), after **add/change/remove** code in any css or js file you will need to
- stop and restar encore each time to generate the new assets:
+ stop and restart encore each time to generate the new assets:
 
      ```bash    
      # compile assets once
