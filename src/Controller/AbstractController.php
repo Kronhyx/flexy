@@ -27,6 +27,7 @@ abstract class AbstractController extends BaseAbstractController
     }
 
     /**
+     * Throw error when entity is not found
      * @param string $msg
      * @throws EntityNotFoundException
      */
@@ -36,8 +37,9 @@ abstract class AbstractController extends BaseAbstractController
     }
 
     /**
-     * @param string $type
+     * Send notification auto-handled by html
      * @param string $message
+     * @param string $type
      */
     protected function sendNotification(string $message, string $type = 'success'): void
     {

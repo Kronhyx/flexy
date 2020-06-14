@@ -38,5 +38,4 @@ class TagFixture extends AbstractFixture
         return $product;
     }
 
-
 }

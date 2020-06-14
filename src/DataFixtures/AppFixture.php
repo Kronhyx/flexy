@@ -29,12 +29,14 @@ class AppFixture extends AbstractFixture implements DependentFixtureInterface
         $products = new ArrayCollection($manager->getRepository(Product::class)->findAll());
         $tags = new ArrayCollection($manager->getRepository(Tag::class)->findAll());
 
+        //Add some tags by each product founded
         $products->map(fn(Product $product) => $this->addTagsToProduct($product, $tags, $manager));
 
         $manager->flush();
     }
 
     /**
+     * Taking a Product as parameter add several tags to this product
      * @param Product $product
      * @param ArrayCollection $tags
      * @param ObjectManager $manager
@@ -44,7 +46,7 @@ class AppFixture extends AbstractFixture implements DependentFixtureInterface
         // Get some random tags
         $randomTags = static::$faker->randomElements($tags->toArray(), static::$faker->numberBetween(1, count($tags)));
 
-        // Walk random tags and add to Product
+        // Walk randomTags and add to Product
         foreach ($randomTags as $tag) {
             $product->addTag($tag);
             $manager->persist($product);
