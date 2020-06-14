@@ -32,4 +32,5 @@ $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function (e) 
 
 $(document).ready(() => {
 	$('select[multiple]').multiSelect({ cssClass: 'w-100' });
+	$('table[data-type="datatable"]').DataTable();
 })
