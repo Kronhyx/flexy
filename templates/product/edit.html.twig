@@ -7,3 +7,22 @@
 {% block toolbar include('product/_delete_form.html.twig') %}
 
 {% block body include('product/_form.html.twig', {'button_label': 'Update'}) %}
+
+{% block javascripts %}
+    <script rel="script">
+        const imageBox = $('#product_image_holder')
+	    $("#{{ form.file.vars.id }}").change(function (){
+		    const file = this.files[0]
+		    const reader = new FileReader()
+		    // Set preview image into the popover data-content
+		    reader.onload = e => {
+			    // $(".image-preview-input-title").text("Change");
+			    // $(".image-preview-clear").show();
+			    // $(".image-preview-filename").val(file.name);
+			    imageBox.attr('src', e.target.result);
+			    // $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+		    }
+		    reader.readAsDataURL(file);
+	    });
+    </script>
+{% endblock %}

@@ -28,13 +28,12 @@
             <div class="card-body">
                 <dl class="row">
                     <div class="col-sm-12">
-                        <img class="img-thumbnail"
-                             src="{{ '/uploads/' ~ (product.image ?? 'default_placeholder.png') }}"
-                             alt="{{ product.title }}">
+                        <img class="img-thumbnail w-100" id="product_image_holder" alt="{{ product.title }}"
+                             src="{{ '/uploads/' ~ (product.image ?? 'default_placeholder.png') }}">
                     </div>
                 </dl>
             </div>
-            <div class="card-footer">{{ form_row(form.file) }}</div>
+            <div class="card-header">{{ form_row(form.file) }}</div>
         </div>
     </div>
     <div class="col-12">
@@ -51,3 +50,10 @@
     </div>
 </div>
 {{ form_end(form) }}
+
+<style rel="stylesheet">
+    #product_image_holder {
+        max-height: 500px;
+        object-fit: scale-down;
+    }
+</style>
