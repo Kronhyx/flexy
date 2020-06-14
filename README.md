@@ -5,8 +5,8 @@
 ![GitHub License](https://img.shields.io/github/license/Kronhyx/flexy)   
    
 <p align="center">
-    <img width="250" height="auto" src="https://symfony.com/logos/symfony_black_02.png" alt="PHP Censor" />
-    <img width="250" height="auto" src="https://d8vlg9z1oftyc.cloudfront.net/site/template/img/logo.png" alt="PHP Censor" />
+    <img width="250" height="auto" src="https://symfony.com/logos/symfony_black_02.png"/>
+    <img width="250" height="auto" src="https://d8vlg9z1oftyc.cloudfront.net/site/template/img/logo.png"/>
 </p>
    
    

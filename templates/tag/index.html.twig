@@ -19,13 +19,11 @@
                 {% endblock %}
                 {% block tbody %}
                     <td>{{ entity.name }}</td>
-                    <td class="btn-group">
-                        <a class="btn btn-primary" href="{{ path('app_tag_show', {'id': entity.id}) }}">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a class="btn btn-secondary" href="{{ path('app_tag_edit', {'id': entity.id}) }}">
-                            <i class="fas fa-pen"></i>
-                        </a>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <a class="btn btn-primary" href="{{ path('app_tag_show', {'id': entity.id}) }}">Show</a>
+                            <a class="btn btn-secondary" href="{{ path('app_tag_edit', {'id': entity.id}) }}">Edit</a>
+                        </div>
                     </td>
                 {% endblock %}
             {% endembed %}

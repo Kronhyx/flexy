@@ -36,7 +36,7 @@
 
             <!-- Begin Page Content -->
             {% block content %}
-                <div class="container-fluid bg-gray-200">
+                <div class="container-fluid bg-gray-200 px-0 px-md-4">
                     {% for alert in app.flashes('bootstrap') %}
                         <div class="alert alert-{{ alert.type }} alert-dismissible fade show" role="alert">
                             <span>{{ alert.message }}</span>
@@ -47,7 +47,7 @@
                     {% endfor %}
 
                     <!-- Page Heading -->
-                    <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4 px-3 px-md-0">
                         <div>
                             <h1 class="h3 mb-0 text-gray-800">{% block caption %}{% endblock %}</h1>
                             <span>{{ block('title') }}</span>

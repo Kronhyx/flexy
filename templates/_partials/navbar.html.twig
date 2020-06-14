@@ -1,22 +1,24 @@
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-    <a class="navbar-brand" href="#">Navbar w/ text</a>
+    <a class="navbar-brand" href="#">
+        <img src="https://d8vlg9z1oftyc.cloudfront.net/site/template/img/logo.png" alt="FLexy Logo" width="150">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav w-100 d-inline-flex d-md-none justify-content-around">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link text-primary" href="{{ path('app_index_index') }}">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link text-primary" href="{{ path('app_product_index') }}">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link text-primary" href="{{ path('app_tag_index') }}">Tags</a>
             </li>
         </ul>
-        <span class="navbar-text">
+        <span class="navbar-text flex-fill text-right">
             <span class="mr-2 d-none d-lg-inline text-gray-600 small font-italic">A simple symfony example</span>
         </span>
     </div>
