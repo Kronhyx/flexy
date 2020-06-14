@@ -4,11 +4,7 @@
 
 {% block caption 'Product' %}
 
-{% block toolbar %}
-    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-primary">
-        <i class="fas fa-save"></i> Update
-    </a>
-{% endblock %}
+{% block toolbar include('product/_delete_form.html.twig') %}
 
 {% block body %}
     <div class="row mb-4">
@@ -36,6 +32,10 @@
                     {% for tag in product.tags %}
                         <a href="{{ path('app_tag_show', {id: tag.id}) }}"
                            class="list-group-item list-group-item-action">{{ tag }}</a>
+                    {% else %}
+                        <div class="p-5 text-center text-muted">
+                            <span class="text-capitalize h3">Without Tags</span>
+                        </div>
                     {% endfor %}
                 </div>
             </div>
@@ -50,10 +50,12 @@
                                  alt="{{ product.title }}">
                         </dd>
                         <hr>
-                        <div class="border-top w-100 font-weight-bold">Description:</div>
-                        <div class="bg-gray-200 w-100">
-                            <dd class="col-sm-12">{{ product.description }}</dd>
-                        </div>
+                        {% if product.description %}
+                            <div class="border-top w-100 font-weight-bold">Description:</div>
+                            <div class="bg-gray-200 w-100">
+                                <dd class="col-sm-12">{{ product.description }}</dd>
+                            </div>
+                        {% endif %}
                     </dl>
                 </div>
             </div>
@@ -66,7 +68,9 @@
                     <a class="btn btn-secondary" href="{{ path('app_product_index') }}">
                         <i class="fas fa-arrow-left"></i> Back
                     </a>
-                    {{ include('product/_delete_form.html.twig') }}
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Update
+                    </a>
                 </div>
             </div>
         </div>

@@ -4,11 +4,7 @@
 
 {% block caption 'Tag' %}
 
-{% block toolbar %}
-    <a href="{{ path('app_tag_edit', {'id': tag.id}) }}" class="btn btn-primary">
-        <i class="fas fa-save"></i> Update
-    </a>
-{% endblock %}
+{% block toolbar include('tag/_delete_form.html.twig') %}
 
 {% block body %}
     <div class="row">
@@ -33,6 +29,10 @@
                     {% for product in tag.products %}
                         <a href="{{ path('app_product_show', {id: product.id}) }}"
                            class="list-group-item list-group-item-action">{{ product }}</a>
+                    {% else %}
+                        <div class="p-5 text-center text-muted">
+                            <span class="text-capitalize h3">Without Products</span>
+                        </div>
                     {% endfor %}
                 </div>
             </div>
@@ -47,7 +47,9 @@
                     <a class="btn btn-secondary" href="{{ path('app_tag_index') }}">
                         <i class="fas fa-arrow-left"></i> Back
                     </a>
-                    {{ include('tag/_delete_form.html.twig') }}
+                    <a href="{{ path('app_tag_edit', {'id': tag.id}) }}" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Update
+                    </a>
                 </div>
             </div>
         </div>
