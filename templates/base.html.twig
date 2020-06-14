@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-gray-200">
 
 <head>
     <meta charset="utf-8">
@@ -10,7 +10,8 @@
 
     <title>{{ block('caption') }} - {% block title %}No Title{% endblock %} - FlexY</title>
 
-    <link href="//fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
     <link href="//cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="//s3.amazonaws.com/ftwo.prod/ftwo/template/image/icon.png" rel="shortcut icon" type="image/png">
     {{ encore_entry_link_tags('app') }}
@@ -36,7 +37,7 @@
 
             <!-- Begin Page Content -->
             {% block content %}
-                <div class="container-fluid bg-gray-200 px-0 px-md-4">
+                <div class="container-fluid px-0 px-md-4">
                     {% for alert in app.flashes('bootstrap') %}
                         <div class="alert alert-{{ alert.type }} alert-dismissible fade show" role="alert">
                             <span>{{ alert.message }}</span>
@@ -47,14 +48,15 @@
                     {% endfor %}
 
                     <!-- Page Heading -->
-                    <div class="d-flex align-items-center justify-content-between mb-4 px-3 px-md-0">
-                        <div>
-                            <h1 class="h3 mb-0 text-gray-800">{% block caption %}{% endblock %}</h1>
-                            <span>{{ block('title') }}</span>
+                    <div class="px-2 py-1 shadow bg-gray-100 mb-4 rounded" style="opacity: .8">
+                        <div class="d-flex align-items-center justify-content-between px-3 px-md-0">
+                            <div>
+                                <h1 class="h3 mb-2 text-gray-800">{% block caption %}{% endblock %}</h1>
+                                <span class="font-italic">{{ block('title') }}</span>
+                            </div>
+                            <div class="d-flex">{% block toolbar %}{% endblock %}</div>
                         </div>
-                        <div class="d-flex">{% block toolbar %}{% endblock %}</div>
                     </div>
-
 
                     {% block body %}
                         <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
