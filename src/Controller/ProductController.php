@@ -54,8 +54,11 @@ class ProductController extends AbstractController
         //Check if form data is sended
         if ($form->isSubmitted() && $form->isValid()) {
 
+            //Handle uploaded file
+            $file = $form->get('file')->getData();
+
             //Upload image file
-            $imageName = $uploadService->upload($form->get('file'));
+            $imageName = $uploadService->upload($file);
             $product->setImage($imageName);
 
             //Save product in DB
@@ -112,12 +115,12 @@ class ProductController extends AbstractController
 
         //Check if form data is sended
         if ($form->isSubmitted() && $form->isValid()) {
-            $formFile = $form->get('file');
+            $file = $form->get('file')->getData();
 
             // this condition is needed because the 'file' field is not required
             // so the images file must be processed only when a file is uploaded
-            if ($formFile->getData()) {
-                $imageName = $uploadService->upload($formFile);
+            if ($file) {
+                $imageName = $uploadService->upload($file);
                 $product->setImage($imageName);
             }
 
