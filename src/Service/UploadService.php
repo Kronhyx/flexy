@@ -45,15 +45,17 @@ class UploadService
     public function upload(UploadedFile $file, string $path = null): string
     {
         //Get the realname of uploaded file
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $originalFilename = $this->getRealFilename($file);
 
         // this is needed to safely include the file name as part of the URL, ex: [my photo.jpg] will be converted to [my-photo.jpg]
         $safeFilename = $this->slugger->slug($originalFilename);
-        $newFilename = uniqid($safeFilename, true).'.'.$file->guessExtension();
+        $newFilename = uniqid($safeFilename, true) . '.' . $file->guessExtension();
 
         // Move the file to the directory where brochures are stored
         try {
-            $file->move($path ?? $this->parameterBag->get('upload_directory'), $newFilename);
+            $uploadDiretory = $this->parameterBag->get('upload_directory');
+
+            $file->move($path ?? $uploadDiretory, $newFilename);
         } catch (FileException $exception) {
             // ... handle exception if something happens during file upload due to read/write permissions
             throw new UploadException(null, 0, $exception);
@@ -62,4 +64,13 @@ class UploadService
         return $newFilename;
     }
 
+    /**
+     * Get the realname of uploaded file
+     * @param UploadedFile $file
+     * @return string|string[]
+     */
+    private function getRealFilename(UploadedFile $file)
+    {
+        return pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+    }
 }
