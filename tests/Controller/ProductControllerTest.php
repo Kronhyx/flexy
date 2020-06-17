@@ -28,7 +28,6 @@ class ProductControllerTest extends WebTestCase
     }
 
     /**
-     * @covers ProductController::index
      * @param string $url
      * @testWith ["/product/"]
      */
@@ -42,7 +41,6 @@ class ProductControllerTest extends WebTestCase
     }
 
     /**
-     * @covers ProductController::new
      * @param string $url
      * @testWith ["/product/new"]
      */
