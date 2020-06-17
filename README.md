@@ -22,7 +22,7 @@
 ## System Requirements
 * GIT 2 or higher 
 
-* PHP 7.1.3 or higher
+* PHP 7.4 or higher
 
 * PHP extensions: (all of them are installed and enabled by default in PHP 7+)
     * Ctype
