@@ -36,8 +36,8 @@ class ProductControllerTest extends WebTestCase
         $this->client->request(Request::METHOD_GET, $url);
         $response = $this->client->getResponse();
 
-        $this->assertTrue($response->isSuccessful());
         $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertTrue($response->isSuccessful());
     }
 
     /**
@@ -49,7 +49,7 @@ class ProductControllerTest extends WebTestCase
         $this->client->request(Request::METHOD_POST, $url);
         $response = $this->client->getResponse();
 
-        $this->assertTrue($response->isSuccessful());
         $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertTrue($response->isSuccessful());
     }
 }
